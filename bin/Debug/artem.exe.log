@@ -1,0 +1,296 @@
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\bulaenko artem\artem\bin\Debug\artem.exe, файл: c:\codeblock\codeblocks\mingw\include\txlib.h, строка: 10828, функция: HDC__* {anonymous}::TX::_txBuffer_Create(HWND, const POINT*, HBITMAP, RGBQUAD**),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400], Instance: 0x005042FC (32-bit), Flags: CMdre0, Thread: 0x32F8 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00410384 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txBuffer_Create() at c:/codeblock/codeblocks/mingw/include/txlib.h (10828)
+# 1 0x0040BA5A in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_OnCREATE() at c:/codeblock/codeblocks/mingw/include/txlib.h (10017)
+# 2 0x0040B518 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_WndProc() at c:/codeblock/codeblocks/mingw/include/txlib.h (9966)
+# 3 0x76DA0BCB in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D97B8A in C:\WINDOWS\System32\USER32.dll: GetClassLongW()
+# 5 0x76D9778A in C:\WINDOWS\System32\USER32.dll: GetClassLongW()
+# 6 0x76D9EA79 in C:\WINDOWS\System32\USER32.dll: GetDC()
+# 7 0x77544F5D in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x76D8F387 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x76D88178 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x0040A313 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_CreateWindow() at c:/codeblock/codeblocks/mingw/include/txlib.h (9805)
+#11 0x004097D4 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_ThreadProc() at c:/codeblock/codeblocks/mingw/include/txlib.h (9718)
+#12 0x75C76CFF in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x75C76DC1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x75DFFA29 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77537B5E in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#16 0x77537B2E in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in HDC__* {anonymous}::TX::_txBuffer_Create(HWND, const POINT*, HBITMAP, RGBQUAD**) at c:\codeblock\codeblocks\mingw\include\txlib.h (10828):
+
+  10826: 
+  10827: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10828: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10829: 
+  10830: $   if (*pixels)
+
+# 1 in bool {anonymous}::TX::_txCanvas_OnCREATE(HWND) at c:\codeblock\codeblocks\mingw\include\txlib.h (10017):
+
+  10015: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10016: 
+=>10017: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10018: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10019: 
+
+# 2 in LRESULT {anonymous}::TX::_txCanvas_WndProc(HWND, UINT, WPARAM, LPARAM) at c:\codeblock\codeblocks\mingw\include\txlib.h (9966):
+
+   9964:     switch (msg)
+   9965:         {
+=> 9966:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+   9967: 
+   9968:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in HWND__* {anonymous}::TX::_txCanvas_CreateWindow(const SIZE*) at c:\codeblock\codeblocks\mingw\include\txlib.h (9802):
+
+   9800: $   if (!wndClass) return (HWND) NULL;
+   9801: 
+=> 9802: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9803:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9804:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int {anonymous}::TX::_txCanvas_ThreadProc(void*) at c:\codeblock\codeblocks\mingw\include\txlib.h (9718):
+
+   9716: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9717: 
+=> 9718: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9719: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9720: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblock\codeblocks\mingw\include\txlib.h
+Compiled:	Sep 22 2022 10:03:51, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Sep 22 2022 10:03:57
+
+Run file:	C:\bulaenko artem\artem\bin\Debug\artem.exe
+Directory:	C:\bulaenko artem\artem
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\bulaenko artem\artem\bin\Debug\artem.exe, файл: c:\codeblock\codeblocks\mingw\include\txlib.h, строка: 8737, функция: HWND__* {anonymous}::TX::txCreateWindow(double, double, bool),
+
+Сообщение: Cannot create canvas window.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400], Instance: 0x005042FC (32-bit), Flags: CMdre0, Thread: 0xB28 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00403A01 in C:\bulaenko artem\artem\bin\Debug\artem.exe: txCreateWindow() at c:/codeblock/codeblocks/mingw/include/txlib.h (8737)
+
+# 1 0x0042B988 in C:\bulaenko artem\artem\bin\Debug\artem.exe: main() at C:/bulaenko artem/artem/main.cpp (7):
+
+      5: int main()
+      6:     {
+=>    7:     txCreateWindow (0, 450);
+      8: 
+      9:     txSetColor (TX_WHITE);
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in HWND__* {anonymous}::TX::txCreateWindow(double, double, bool) at c:\codeblock\codeblocks\mingw\include\txlib.h (8737):
+
+   8735: $   _txWaitFor (_txRunning, 10*_TX_TIMEOUT);
+   8736: 
+=> 8737: $   if (!_txRunning)       return TX_DEBUG_ERROR ("\a" "Cannot create canvas window."), (HWND) NULL;
+   8738: $   if (!txOK())           return TX_DEBUG_ERROR ("\a" "Canvas window is not OK."),     (HWND) NULL;
+   8739: 
+
+# 1 in int main() at C:\bulaenko artem\artem\main.cpp (7):
+
+      5: int main()
+      6:     {
+=>    7:     txCreateWindow (0, 450);
+      8: 
+      9:     txSetColor (TX_WHITE);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblock\codeblocks\mingw\include\txlib.h
+Compiled:	Sep 22 2022 10:03:51, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Sep 22 2022 10:03:57
+
+Run file:	C:\bulaenko artem\artem\bin\Debug\artem.exe
+Directory:	C:\bulaenko artem\artem
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\bulaenko artem\artem\bin\Debug\artem.exe, файл: c:\codeblock\codeblocks\mingw\include\txlib.h, строка: 10828, функция: HDC__* {anonymous}::TX::_txBuffer_Create(HWND, const POINT*, HBITMAP, RGBQUAD**),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400], Instance: 0x005042FC (32-bit), Flags: CMdre0, Thread: 0x28C8 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00410384 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txBuffer_Create() at c:/codeblock/codeblocks/mingw/include/txlib.h (10828)
+# 1 0x0040BA5A in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_OnCREATE() at c:/codeblock/codeblocks/mingw/include/txlib.h (10017)
+# 2 0x0040B518 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_WndProc() at c:/codeblock/codeblocks/mingw/include/txlib.h (9966)
+# 3 0x76DA0BCB in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D97B8A in C:\WINDOWS\System32\USER32.dll: GetClassLongW()
+# 5 0x76D9778A in C:\WINDOWS\System32\USER32.dll: GetClassLongW()
+# 6 0x76D9EA79 in C:\WINDOWS\System32\USER32.dll: GetDC()
+# 7 0x77544F5D in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x76D8F387 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x76D88178 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x0040A313 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_CreateWindow() at c:/codeblock/codeblocks/mingw/include/txlib.h (9805)
+#11 0x004097D4 in C:\bulaenko artem\artem\bin\Debug\artem.exe: _txCanvas_ThreadProc() at c:/codeblock/codeblocks/mingw/include/txlib.h (9718)
+#12 0x75C76CFF in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x75C76DC1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x75DFFA29 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77537B5E in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#16 0x77537B2E in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in HDC__* {anonymous}::TX::_txBuffer_Create(HWND, const POINT*, HBITMAP, RGBQUAD**) at c:\codeblock\codeblocks\mingw\include\txlib.h (10828):
+
+  10826: 
+  10827: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10828: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10829: 
+  10830: $   if (*pixels)
+
+# 1 in bool {anonymous}::TX::_txCanvas_OnCREATE(HWND) at c:\codeblock\codeblocks\mingw\include\txlib.h (10017):
+
+  10015: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10016: 
+=>10017: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10018: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10019: 
+
+# 2 in LRESULT {anonymous}::TX::_txCanvas_WndProc(HWND, UINT, WPARAM, LPARAM) at c:\codeblock\codeblocks\mingw\include\txlib.h (9966):
+
+   9964:     switch (msg)
+   9965:         {
+=> 9966:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+   9967: 
+   9968:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in HWND__* {anonymous}::TX::_txCanvas_CreateWindow(const SIZE*) at c:\codeblock\codeblocks\mingw\include\txlib.h (9802):
+
+   9800: $   if (!wndClass) return (HWND) NULL;
+   9801: 
+=> 9802: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9803:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9804:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int {anonymous}::TX::_txCanvas_ThreadProc(void*) at c:\codeblock\codeblocks\mingw\include\txlib.h (9718):
+
+   9716: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9717: 
+=> 9718: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9719: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9720: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblock\codeblocks\mingw\include\txlib.h
+Compiled:	Sep 22 2022 10:06:17, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Sep 22 2022 10:06:23
+
+Run file:	C:\bulaenko artem\artem\bin\Debug\artem.exe
+Directory:	C:\bulaenko artem\artem
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\bulaenko artem\artem\bin\Debug\artem.exe, файл: c:\codeblock\codeblocks\mingw\include\txlib.h, строка: 8737, функция: HWND__* {anonymous}::TX::txCreateWindow(double, double, bool),
+
+Сообщение: Cannot create canvas window.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400], Instance: 0x005042FC (32-bit), Flags: CMdre0, Thread: 0x2750 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00403A01 in C:\bulaenko artem\artem\bin\Debug\artem.exe: txCreateWindow() at c:/codeblock/codeblocks/mingw/include/txlib.h (8737)
+
+# 1 0x0042B988 in C:\bulaenko artem\artem\bin\Debug\artem.exe: main() at C:/bulaenko artem/artem/main.cpp (7):
+
+      5: int main()
+      6:     {
+=>    7:     txCreateWindow (0, 450);
+      8: 
+      9:     txSetColor (TX_WHITE);
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in HWND__* {anonymous}::TX::txCreateWindow(double, double, bool) at c:\codeblock\codeblocks\mingw\include\txlib.h (8737):
+
+   8735: $   _txWaitFor (_txRunning, 10*_TX_TIMEOUT);
+   8736: 
+=> 8737: $   if (!_txRunning)       return TX_DEBUG_ERROR ("\a" "Cannot create canvas window."), (HWND) NULL;
+   8738: $   if (!txOK())           return TX_DEBUG_ERROR ("\a" "Canvas window is not OK."),     (HWND) NULL;
+   8739: 
+
+# 1 in int main() at C:\bulaenko artem\artem\main.cpp (7):
+
+      5: int main()
+      6:     {
+=>    7:     txCreateWindow (0, 450);
+      8: 
+      9:     txSetColor (TX_WHITE);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-07-23 02:08:28 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblock\codeblocks\mingw\include\txlib.h
+Compiled:	Sep 22 2022 10:06:17, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Sep 22 2022 10:06:22
+
+Run file:	C:\bulaenko artem\artem\bin\Debug\artem.exe
+Directory:	C:\bulaenko artem\artem
+
+--------------------------------------------------
