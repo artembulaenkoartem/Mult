@@ -101,7 +101,8 @@ void drawhouse(int x_door, int y_door)
  }
 
  void drawHouse1()
- {  //ÒÚÂÌ˚
+ {
+   //ÒÚÂÌ˚
     txSetColor(TX_GREEN);
     txSetFillColor(TX_GREEN);
     txRectangle(0 ,0, 800, 600);
@@ -120,6 +121,37 @@ void drawhouse(int x_door, int y_door)
     txRectangle(685,452,695,505);
     txSetFillColor (TX_WHITE);
     txCircle(630,410,25);
+    // –Œ¬¿“‹
+    txSetColor(TX_TRANSPARENT);
+    txSetFillColor(TX_BROWN);
+    txRectangle(40,395,230,470);
+    txRectangle(40,470,45,510);
+    txRectangle(225,470,230,510);
+    txSetFillColor(TX_RED);
+    txRectangle(45,405,170,460);
+    txSetFillColor(TX_WHITE);
+    txRectangle(180,405,225,460);
+    txSetFillColor(TX_BROWN);
+    txRectangle(255,375,340,480);
+    txSetFillColor(TX_LIGHTGRAY);
+    txCircle(285,410,5);
+    txCircle(305,410,5);
+    // ¿–“»Õ¿
+    txSetFillColor(TX_BLACK);
+    txRectangle(40,50,210,165);
+    txSetFillColor(TX_BROWN);
+    txRectangle(45,55,205,160);
+    //»Õ“≈–‹–
+    txSetColor(TX_BLACK);
+    txSetFillColor (TX_GREEN);
+    POINT el1[3] = {{460,340}, {425, 358}, {485,433}};
+    txPolygon (el1, 3);
+    POINT el2[3] = {{480,357}, {425, 303}, {470,455}};
+    txPolygon (el2, 3);
+    POINT el3[3] = {{393,300}, {425, 255}, {455,301}};
+    txPolygon (el3, 3);
+
+
 
  }
 
