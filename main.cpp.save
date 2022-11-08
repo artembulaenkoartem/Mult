@@ -142,13 +142,17 @@ void drawhouse(int x_door, int y_door)
     txSetFillColor(TX_BROWN);
     txRectangle(45,55,205,160);
     //»Õ“≈–‹–
-    txSetFillColor (TX_GREEN);
-    POINT star[3] = {{460,340}, {423, 358}, {485,433}};
-    txPolygon (star, 3);
-POINT star[3] = {{460,340}, {423, 358}, {485,433}};
-    txPolygon (star, 3);
-
-
+    txSetColor(TX_TRANSPARENT);
+    txSetFillColor (TX_LIGHTGREEN);
+    POINT el1[3] = {{360,435}, {420, 360}, {485,435}};
+    txPolygon (el1, 3);
+    POINT el2[3] = {{375,360}, {420, 305}, {468,360}};
+    txPolygon (el2, 3);
+    POINT el3[3] = {{385,305}, {420, 255}, {455,305}};
+    txPolygon (el3, 3);
+    txSetColor(TX_TRANSPARENT);
+    txSetFillColor(TX_BROWN);
+    txRectangle(410,435,430,480);
 
 
  }
