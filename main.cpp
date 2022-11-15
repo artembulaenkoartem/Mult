@@ -178,6 +178,27 @@ void drawhouse(int x_door, int y_door)
 
  }
 
+ void drawcake(int x, int y)
+ {
+    //x= 395 y= 520
+    txSetColor(TX_WHITE);
+    txSetFillColor(TX_WHITE);
+    txRectangle(x+0, y+0, x+40,y+19);
+    txRectangle(x+5, y-12,x+30,y+0);
+    txRectangle(x+13,y-27,x+20,y-12);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
 int main()
     {
     txCreateWindow (800, 600);
@@ -190,6 +211,8 @@ int main()
     int xdoor = 560;
     int ydoor = 465;
     int xTree = 225;
+    int xcake = xman+10;
+    int ycake = yman+40;
 
 
     while(xSun < 900)
@@ -218,12 +241,16 @@ int main()
         drawhouse(xdoor, ydoor);
         drawman(xman,yman, rasmman);
         drawtree(xTree);
-
+        drawcake(xcake,ycake);
 
 
         xCloud = xCloud - 7;
         xSun = xSun + 7;
         xman = xman + 7;
+        xcake +=7;
+
+
+
 
         txSleep(10);
     }
@@ -238,6 +265,10 @@ int main()
         drawhouse(xdoor, ydoor);
         drawman(xman,yman, rasmman);
         drawtree(xTree);
+        drawcake(xcake,ycake);
+
+
+
 
         xdoor = xdoor - 1;
         ydoor = ydoor + 1;
@@ -254,6 +285,7 @@ int main()
         drawhouse(xdoor, ydoor);
         drawman(xman,yman, rasmman);
         drawtree(xTree);
+        drawcake(xcake,ycake);
 
         rasmman -=0.01;
 
@@ -271,14 +303,29 @@ int main()
         drawhouse(xdoor, ydoor);
         drawtree(xTree);
 
+
         xdoor = xdoor + 1;
         ydoor = ydoor - 1;
 
         txSleep(10);
     }
 
-    drawHouse1();
+    xman = -10;
+    xcake = xman+20;
+    while(xman < 560)
 
+    {
+        drawHouse1();
+        drawman(xman,yman, rasmman);
+        drawcake(xcake,ycake);
+
+        xman = xman + 7;
+        xcake +=7;
+
+
+
+        txSleep(10);
+    }
 
 
 
