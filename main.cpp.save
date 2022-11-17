@@ -10,6 +10,15 @@ void drawFon()
     txRectangle (0, 450, 800, 600);
 }
 
+void ozero()
+{
+// озеро
+  txSetColor (TX_WHITE);
+  txSetFillColor (TX_WHITE);
+  txEllipse(80,40,700,600);
+}
+
+
 void drawSun(int x)
 {
     // солнце
@@ -180,23 +189,14 @@ void drawhouse(int x_door, int y_door)
 
  void drawcake(int x, int y)
  {
-    //x= 395 y= 520
-    txSetColor(TX_TRANSPARENT);
-    txSetFillColor(TX_WHITE);
+
+    txSetColor(TX_RED);
+    txSetFillColor(TX_RED);
     txRectangle(x+0, y+0, x+40,y+19);
     txRectangle(x+5, y-12,x+30,y+0);
     txRectangle(x+13,y-27,x+20,y-12);
 
   }
-
-
-
-
-
-
-
-
-
 
 
 int main()
@@ -269,8 +269,8 @@ int main()
 
 
 
-        //ycake = ycake + 7;
-        //xcake = xcake + 7;
+        xCloud = xCloud - 7;
+        xSun = xSun + 7;
         xdoor = xdoor - 1;
         ydoor = ydoor + 1;
 
@@ -286,9 +286,11 @@ int main()
         drawhouse(xdoor, ydoor);
         drawman(xman,yman, rasmman);
         drawtree(xTree);
+        drawcake(xcake,ycake);
 
         rasmman -=0.01;
-
+        xCloud = xCloud - 7;
+        xSun = xSun + 7;
 
         txSleep(10);
     }
@@ -303,18 +305,47 @@ int main()
         drawhouse(xdoor, ydoor);
         drawtree(xTree);
 
+        xCloud = xCloud - 7;
+        xSun = xSun + 7;
         xdoor = xdoor + 1;
         ydoor = ydoor - 1;
 
         txSleep(10);
     }
 
-    drawHouse1();
+    xman = -10;
+    xcake = xman+20;
+    rasmman = 1;
+    while(xman < 590)
+    {
+        drawHouse1();
+        drawman(xman,yman, rasmman);
+        drawcake(xcake,ycake);
+
+        xman = xman + 7;
+        xcake +=7;
 
 
 
+        txSleep(10);
+    }
+
+    while(yman > 360)
+    {
+        drawHouse1();
+        drawman(xman,yman, rasmman);
+        drawcake(xcake,ycake);
+
+        yman = yman - 7;
+        ycake -=7;
 
 
+
+        txSleep(10);
+    }
+
+    drawFon();
+    ozero();
 
   txTextCursor (false);
 
