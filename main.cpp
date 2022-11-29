@@ -1,5 +1,23 @@
 #include "TXLib.h"
 
+void drawTitresBegin(int x,int y)
+{
+
+    txSetColor(TX_WHITE);
+    txSetFillColor(TX_WHITE);
+    txSelectFont("comic Sans MS", 50,15,FW_BOLD);
+    txDrawText  (x,y,x+1000,y+500,"НОВЫЙ ГОД" );
+}
+
+void drawTitresFinal(int y )
+{
+txSetColor(TX_WHITE);
+txSelectFont("Arial",60,0,FW_BOLD);
+txDrawText  (100,y,1100,y+100,"КОНЕЦ");
+txSelectFont("Arial",10);
+
+}
+
 void drawFon()
 {
  //  фон
@@ -14,7 +32,7 @@ void ozero()
 {
 // озеро
   txSetColor (TX_WHITE);
-  txSetFillColor (TX_WHITE);
+  txSetFillColor (TX_BLUE);
   txEllipse(50,450,700,600);
 }
 
@@ -214,6 +232,9 @@ int main()
     int xcake = xman+10;
     int ycake = yman+40;
 
+
+    drawTitresBegin(100,100);
+    txSleep(5000);
 
     while(xSun < 900)
     {
