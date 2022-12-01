@@ -6,14 +6,32 @@ void drawTitresBegin(int x,int y)
     txSetColor(TX_WHITE);
     txSetFillColor(TX_WHITE);
     txSelectFont("comic Sans MS", 50,15,FW_BOLD);
-    txDrawText  (x,y,x+1000,y+500,"НОВЫЙ ГОД" );
+    txDrawText  (x,y,x+600,y+50,"НОВЫЙ ГОД" );
+
+    txSelectFont("comic Sans MS", 30,15,FW_BOLD);
+    txDrawText  (x,y+60,x+600,y+110,"Автор:Булаеко Артем");
+
+
+    txSelectFont("comic Sans MS", 30,15,FW_BOLD);
+    txDrawText  (x,y+70,x+600,y+170,"продюсер:Булаеко Артем");
+
+    txSelectFont("comic Sans MS", 30,15,FW_BOLD);
+    txDrawText  (x,y+80,x+600,y+230,"режисер:Булаеко Артем");
+
+    txSelectFont("comic Sans MS", 30,15,FW_BOLD);
+    txDrawText  (x,y+90,x+600,y+290,"помогал:Сергей Поврозюк");
+
+
+
+
 }
 
 void drawTitresFinal(int y )
 {
-txSetColor(TX_WHITE);
+txSetColor(TX_BLACK);
+txSetFillColor(TX_BLACK);
 txSelectFont("Arial",60,0,FW_BOLD);
-txDrawText  (100,y,1100,y+100,"КОНЕЦ");
+txDrawText  (100,y,600,y+50,"КОНЕЦ");
 txSelectFont("Arial",10);
 
 }
@@ -24,18 +42,9 @@ void drawFon()
     txSetColor (TX_WHITE);
     txSetFillColor (TX_LIGHTBLUE);
     txRectangle (0, 0, 800, 450);
-    txSetFillColor (TX_GREEN);
+    txSetFillColor (TX_WHITE);
     txRectangle (0, 450, 800, 600);
 }
-
-void ozero()
-{
-// озеро
-  txSetColor (TX_WHITE);
-  txSetFillColor (TX_BLUE);
-  txEllipse(50,450,700,600);
-}
-
 
 void drawSun(int x)
 {
@@ -139,6 +148,10 @@ void drawhouse(int x_door, int y_door)
     txRectangle(0, 450, 800, 600);
     //мебель
     txSetFillColor(TX_BLACK);
+    txRectangle(714,472,775,443);
+    txRectangle(715,470,724,510);
+    txRectangle(762,473,774,507);
+    txRectangle(753,363,775,443);
     txRectangle(505,445,525,365);
     txRectangle(505,445,560,475);
     txRectangle(506,475,518,506);
@@ -366,7 +379,8 @@ int main()
     }
 
     drawFon();
-    ozero();
+
+    drawTitresFinal(100);
 
   txTextCursor (false);
 
