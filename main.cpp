@@ -9,17 +9,17 @@ void drawTitresBegin(int x,int y)
     txDrawText  (x,y,x+600,y+50,"НОВЫЙ ГОД" );
 
     txSelectFont("comic Sans MS", 30,15,FW_BOLD);
-    txDrawText  (x,y+60,x+600,y+110,"Автор:Булаеко Артем");
+    txDrawText  (x,y+60,x+600,y+170,"Автор:Булаеко Артем");
 
 
     txSelectFont("comic Sans MS", 30,15,FW_BOLD);
-    txDrawText  (x,y+70,x+600,y+170,"продюсер:Булаеко Артем");
+    txDrawText  (x,y+70,x+600,y+230,"продюсер:Булаеко Артем");
 
     txSelectFont("comic Sans MS", 30,15,FW_BOLD);
-    txDrawText  (x,y+80,x+600,y+230,"режисер:Булаеко Артем");
+    txDrawText  (x,y+80,x+600,y+290,"режисер:Булаеко Артем");
 
     txSelectFont("comic Sans MS", 30,15,FW_BOLD);
-    txDrawText  (x,y+90,x+600,y+290,"помогал:Сергей Поврозюк");
+    txDrawText  (x,y+90,x+600,y+350,"помогал:Сергей Поврозюк");
 
 
 
@@ -28,10 +28,10 @@ void drawTitresBegin(int x,int y)
 
 void drawTitresFinal(int y )
 {
-txSetColor(TX_BLACK);
-txSetFillColor(TX_BLACK);
+txSetColor(TX_WHITE);
+txSetFillColor(TX_WHITE);
 txSelectFont("Arial",60,0,FW_BOLD);
-txDrawText  (100,y,600,y+50,"КОНЕЦ");
+txDrawText  (100,y,700,y+50,"КОНЕЦ");
 txSelectFont("Arial",10);
 
 }
@@ -216,15 +216,28 @@ void drawhouse(int x_door, int y_door)
     txCircle (522,102,10);
     txCircle (661, 80,10);
 
+    txSetColor(TX_ORANGE);
+    txSetFillColor(TX_ORANGE);
+    //2 человек
+    txCircle (726,363,20);
+    txLine(730,380,730,437);
+    txLine(730,437,690,446);
+    txLine(730,437,708,480);
+    txLine(730,400,690,390);
+    txLine(730,400,688,418);
  }
 
  void drawcake(int x, int y)
  {
 
-    txSetColor(TX_RED);
+    txSetColor (TX_RED);
     txSetFillColor(TX_RED);
     txRectangle(x+0, y+0, x+40,y+19);
+    txSetColor (TX_MAGENTA);
+    txSetFillColor(TX_MAGENTA);
     txRectangle(x+5, y-12,x+30,y+0);
+    txSetColor(TX_RED);
+    txSetFillColor(TX_RED);
     txRectangle(x+13,y-27,x+20,y-12);
 
   }
@@ -378,7 +391,9 @@ int main()
         txSleep(10);
     }
 
-    drawFon();
+    txSetColor (TX_BLACK);
+    txSetFillColor (TX_BLACK);
+    txRectangle (0, 0, 800, 600);
 
     drawTitresFinal(100);
 
