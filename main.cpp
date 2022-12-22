@@ -76,15 +76,31 @@ void drawhouse(int x_door, int y_door)
     txSetFillColor (TX_BLACK);
     txCircle(x_door+550-560,y_door+540-480,5);
 
-     //окно
-     txSetFillColor (TX_TRANSPARENT);
-   txRectangle(650,390,650,460);
+    //окно
+    txSetFillColor (TX_TRANSPARENT);
+    txRectangle(650,390,650,460);
 
-  txSetFillColor (TX_WHITE);
-   txRectangle(610,430,680,430);
+    txSetFillColor (TX_WHITE);
+    txRectangle(610,430,680,430);
 
-  txSetFillColor (TX_TRANSPARENT);
-   txRectangle(610,400,690,460);
+    txSetFillColor (TX_TRANSPARENT);
+    txRectangle(610,400,690,460);
+
+ }
+
+ void drawGorka()
+ {
+ //горка возле дома
+    txSetColor (RGB (185,122,87));
+    txSetFillColor (RGB (185,122,87));
+    txRectangle(354,516,405,542);
+    txRectangle(337,492,385,518);
+    txRectangle(320,470,365,495);
+    txRectangle(373,540,419,565);
+    txRectangle(316,470,327,567);
+    txLine(317,470,221,530);
+    txLine(317,490,237,550);
+    txLine(220,530,237,550);
  }
 
  void drawclouv(int x)
@@ -106,15 +122,15 @@ void drawhouse(int x_door, int y_door)
 
  txSetColor (TX_BROWN);
  txSetFillColor (TX_BROWN);
- txRectangle(x+180-225,420,x+225-225,575);
+ txRectangle(x+80-225,420,x+125-225,575);
 
 
  txSetColor(TX_GREEN);
  txSetFillColor(TX_GREEN);
- txEllipse(x+125-225,380,x+210-225,470);
- txEllipse(x+160-225,330,x+225-225,410);
- txEllipse(x+280-225,385,x+190-225,470);
- txEllipse(x+255-225,330,x+200-225,410);
+ txEllipse(x+25 -225,380,x+110-225,470);
+ txEllipse(x+60 -225,330,x+125-225,410);
+ txEllipse(x+180-225,385,x+90 -225,470);
+ txEllipse(x+155-225,330,x+100-225,410);
 
 
  }
@@ -267,7 +283,7 @@ int main()
         drawFon();
         drawSun(xSun);
         drawclouv(xCloud);
-        for(int x=100; x<=700; x+=200)
+        for(int x=220; x<=800; x+=180)
         {
             drawtree(x);
         }
@@ -279,6 +295,7 @@ int main()
 
     xSun = 100;
     xCloud = 450;
+    xTree = 250;
     while(xman < 530)
 
     {
@@ -286,6 +303,7 @@ int main()
         drawSun(xSun);
         drawclouv(xCloud);
         drawhouse(xdoor, ydoor);
+        drawGorka();
         drawman(xman,yman, rasmman);
         drawtree(xTree);
         drawcake(xcake,ycake);
@@ -310,6 +328,7 @@ int main()
         drawSun(xSun);
         drawclouv(xCloud);
         drawhouse(xdoor, ydoor);
+        drawGorka();
         drawman(xman,yman, rasmman);
         drawtree(xTree);
         drawcake(xcake,ycake);
@@ -331,6 +350,7 @@ int main()
         drawSun(xSun);
         drawclouv(xCloud);
         drawhouse(xdoor, ydoor);
+        drawGorka();
         drawman(xman,yman, rasmman);
         drawtree(xTree);
         drawcake(xcake,ycake);
@@ -348,6 +368,7 @@ int main()
         drawFon();
         drawSun(xSun);
         drawclouv(xCloud);
+        drawGorka();
         drawman(xman,yman, rasmman);
         drawhouse(xdoor, ydoor);
         drawtree(xTree);
