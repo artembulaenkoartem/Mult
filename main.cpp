@@ -98,9 +98,20 @@ void drawhouse(int x_door, int y_door)
     txRectangle(320,470,365,495);
     txRectangle(373,540,419,565);
     txRectangle(316,470,327,567);
-    txLine(317,470,221,530);
-    txLine(317,490,237,550);
-    txLine(220,530,237,550);
+    POINT gorka[4] = {{315,471}, {155,570}, {190,570}, {315,495}};
+    txPolygon (gorka, 4);
+
+    //ледянки возле дома
+    txSetColor(TX_BLUE);
+    txSetFillColor(TX_BLUE);
+    txCircle(282,542,30);
+
+    txSetColor(TX_ORANGE);
+    txSetFillColor(TX_ORANGE);
+    txCircle(310,542,30);
+
+
+
  }
 
  void drawclouv(int x)
@@ -197,7 +208,7 @@ void drawhouse(int x_door, int y_door)
     txRectangle(40,50,210,165);
     txSetFillColor(TX_BROWN);
     txRectangle(45,55,205,160);
-    //ИНТЕРЬР
+    //елка
     txSetColor(TX_TRANSPARENT);
     txSetFillColor (TX_LIGHTGREEN);
     POINT el1[3] = {{360,435}, {420, 360}, {485,435}};
@@ -206,11 +217,11 @@ void drawhouse(int x_door, int y_door)
     txPolygon (el2, 3);
     POINT el3[3] = {{385,305}, {420, 255}, {455,305}};
     txPolygon (el3, 3);
-
     txSetColor(TX_TRANSPARENT);
     txSetFillColor(TX_BROWN);
     txRectangle(410,435,430,480);
 
+    //гирлянда
     txSetColor(TX_BLACK);
     txSetFillColor(TX_TRANSPARENT);
     txArc (0, -100, 800, 100, 180, 180);
